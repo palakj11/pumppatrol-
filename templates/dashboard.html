@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PumpPatrol | Live Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="logo">PumpPatrol <span class="badge">ADMIN</span></div>
+        <div class="nav-links">
+            <a href="/" class="nav-item">Manual Audit</a>
+            <a href="/dashboard" class="nav-item active">Live Dashboard</a>
+            <a href="/history" class="nav-item">Proof Points</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-grid">
+        <div class="panel telegram-panel">
+            <div class="panel-header"><h3>Telegram Intel</h3><span class="live-dot">● Live</span></div>
+            <div class="scroll-content" id="telegramList"><div class="loading" style="padding:20px;">Connecting...</div></div>
+        </div>
+
+        <div class="right-column">
+
+            <div class="panel detail-panel" style="overflow-y: auto; max-height: 600px;">
+
+                <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Deep Scan Analysis</h3>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button id="btnNews" class="action-btn" style="padding: 5px 15px; font-size: 0.75rem; background: #2b2e36; border: 1px solid #444; cursor: pointer;">
+                            📰 NEWS
+                        </button>
+                        <div id="selectedTicker" class="badge">SELECT STOCK</div>
+                    </div>
+                </div>
+
+                <div class="detail-content hidden" id="detailView" style="display: block; padding: 20px;">
+
+                    <div class="dashboard-score-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                        <div class="score-group">
+                            <span style="color:#8b909a; font-size:0.9rem;">FRAUD PROBABILITY</span>
+                            <h1 id="detailScoreRing" style="font-size: 2.5rem; margin: 5px 0;">0%</h1>
+                            <span id="detailVerdict" class="badge">WAITING</span>
+                        </div>
+                        <div class="reason-group" style="flex: 1; margin-left: 30px;">
+                            <div id="detailReason" class="reason-box" style="text-align: left;">Select a stock...</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-row" style="margin-bottom: 20px;">
+                        <div class="stat-pill"><span class="label">Volume (1W)</span><span class="value" id="detailVol">--</span></div>
+                        <div class="stat-pill"><span class="label">Equity Cap</span><span class="value" id="detailEquity">--</span></div>
+                    </div>
+
+                    <div class="charts-grid" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                        <div class="chart-container" style="height: 180px;">
+                            <h3 style="font-size:0.8rem;">Profit vs Cash Flow</h3>
+                            <div class="canvas-wrapper" style="height: 140px;">
+                                <canvas id="dashAuditChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="height: 180px;">
+                            <h3 style="font-size:0.8rem;">Promoter Trend</h3>
+                            <div class="canvas-wrapper" style="height: 140px;">
+                                <canvas id="dashPromoterChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="cyber-table">
+                            <thead><tr><th>Metric</th><th>Q1</th><th>Q2</th><th>Q3</th></tr></thead>
+                            <tbody id="detailTableBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div id="detailPlaceholder" class="placeholder-text" style="height:300px;">
+                    Select a stock from the list below to view full forensic analysis.
+                </div>
+            </div>
+
+            <div class="panel stock-list-panel">
+                <div class="panel-header"><h3>Detected Targets (MySQL)</h3><span class="count-badge" id="stockCount">0</span></div>
+                <div class="table-wrapper">
+                    <table class="cyber-table">
+                        <thead><tr><th>Symbol</th><th>Name</th><th>Action</th></tr></thead>
+                        <tbody id="stockTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="newsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Market Intel</h3>
+                <span class="close-btn" onclick="closeNewsModal()">&times;</span>
+            </div>
+            <div id="newsContainer" class="news-list"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

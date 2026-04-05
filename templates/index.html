@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PumpPatrol | Forensic Audit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 20px; }
+        .input-card { grid-column: 1 / 2; }
+        .result-card { grid-column: 2 / 3; }
+        .table-card { grid-column: 1 / -1; width: 100%; }
+        .reason-box { margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; font-size: 0.9rem; color: #d1d5db; text-align: center; border: 1px dashed #444; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div class="logo-section"><h1>PumpPatrol <span class="badge">MANUAL AUDIT</span></h1></div>
+            <div class="user-profile"><a href="/dashboard" class="nav-link-btn">Go to Live Dashboard →</a></div>
+        </header>
+
+        <div class="main-grid">
+            <div class="card input-card">
+                <h2>Initiate Scan</h2>
+                <div class="input-group">
+                    <label>Screener Symbol</label>
+                    <div class="input-wrapper"><input type="text" id="sTicker" placeholder="e.g. 500325"><span class="icon">📂</span></div>
+                </div>
+                <div class="input-group">
+                    <label>Yahoo Ticker</label>
+                    <div class="input-wrapper"><input type="text" id="yTicker" placeholder="e.g. RELIANCE.BO"><span class="icon">📈</span></div>
+                </div>
+                <div class="button-group">
+                    <button onclick="runAudit()" class="action-btn scan-btn">SCAN ASSET <span class="arrow">→</span></button>
+                    <button onclick="downloadManualPdf()" class="action-btn report-btn">📄 PDF REPORT</button>
+                </div>
+            </div>
+
+            <div class="card result-card hidden" id="scoreCard">
+                <div class="card-header"><h2>Fraud Probability</h2><span class="more-opt">•••</span></div>
+                <div class="score-display centered-score"><h1 id="scoreDisplay">0.00%</h1><span id="verdictBadge" class="badge safe">WAITING...</span></div>
+                <div id="reasonDisplay" class="reason-box">System waiting for input...</div>
+            </div>
+
+            <div class="card table-card hidden" id="tableCard">
+                <div class="card-header-flex">
+                    <h2>Financial Evidence</h2>
+                    <div class="stats-row">
+                        <div class="stat-pill"><span class="label">Volume</span><span class="value" id="volDisplay">--</span></div>
+                        <div class="stat-pill"><span class="label">Equity Cap</span><span class="value" id="equityDisplay">--</span></div>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-container"><h3>Profit vs. Cash Flow</h3><div class="canvas-wrapper"><canvas id="auditChart"></canvas></div></div>
+                    <div class="chart-container"><h3>Promoter Holding Trend</h3><div class="canvas-wrapper"><canvas id="promoterChart"></canvas></div></div>
+                </div>
+                <div class="table-responsive">
+                    <table><thead><tr><th>Metric</th><th>Q1</th><th>Q2</th><th>Q3</th></tr></thead><tbody id="evidenceBody"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

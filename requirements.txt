@@ -1,0 +1,7 @@
+flask
+flask-cors
+pandas
+textblob
+telethon
+fpdf
+yfinance
