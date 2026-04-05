@@ -14,27 +14,6 @@ PumpPatrol is an automated monitoring and analysis system designed to track susp
 
 ---
 
-## 🏗️ Project Structure
-
-```
-pumppatrol_2026/
-│
-├── app.py                  # Main application entry
-├── dashboard_server.py     # Dashboard backend
-├── brain_engine.py         # Core logic engine
-├── scout.py                # Data scouting module
-├── spy_engine.py           # Monitoring engine
-├── analysis.py             # Data analysis
-├── evidence_gen.py         # Report generation
-│
-├── templates/              # HTML templates
-├── static/                 # JS, CSS
-├── data/                   # Data storage
-├── reports/                # Generated reports
-│
-├── requirements.txt        # Dependencies
-└── README.md               # Project documentation
-```
 
 ---
 
@@ -89,15 +68,6 @@ http://localhost:5000
 
 ---
 
-## ⚠️ Security Notice
-
-Do NOT upload:
-
-* `.env`
-* `.session` files
-* Any API keys or credentials
-
----
 
 ## 📌 Future Improvements
 
