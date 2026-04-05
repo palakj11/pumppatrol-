@@ -5,10 +5,11 @@ import yfinance as yf
 
 
 # --- DATABASE CONFIG ---
-DB_CONFIG = {
-    'host': '127.0.0.1', 'user': 'root',
-    'password': '31072006Palak', 'database': 'pumppatrol'
-}
+import os
+
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
 
 
 def ticker_exists(ticker_ns):
