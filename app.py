@@ -17,12 +17,14 @@ import random
 app = Flask(__name__)
 
 # --- DATABASE CONFIG ---
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '31072006Palak',  # <--- UPDATE THIS
-    'database': 'pumppatrol'
-}
+import os
+
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+
+TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
 
 
 def get_db_connection():
